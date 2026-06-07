@@ -1,2 +1,2 @@
 # todo-app
-ToDo Apll - Javascript Project
+ToDo App - Javascript Project
