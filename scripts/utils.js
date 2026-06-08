@@ -2,6 +2,8 @@ import { searchInputElement, taskListElement } from "./elements";
 
 const TASK_KEY = "tasks";
 
+let current_tasks;
+
 const saveData = (key, value) => {
   console.log(`saveData: ${key} -> ${JSON.stringify(value)}`)
   localStorage.setItem(key, JSON.stringify(value)); // array of objects
@@ -38,10 +40,18 @@ const tasksToHtml = (tasks) => {
   return result;
 }
 
-export const loadTasks = () => {
-  const tasksArray = fetchData(TASK_KEY);
-  taskListElement.innerHTML = tasksToHtml(tasksArray);
-  return tasksArray;
+export const loadTasks = (new_task) => {
+  current_tasks = fetchData(TASK_KEY);
+  if(new_task){
+    current_tasks.push(new_task);
+  }
+  taskListElement.innerHTML = tasksToHtml(current_tasks);
+
+  const deleteIcons = document.querySelectorAll('.TaskList__deleteIcon');
+  console.log(deleteIcons);
+  deleteIcons?.forEach((icon, index) => {
+    icon.onclick = (event) => deleteTask(event, index);
+  });
 }
 
 export const addTask = (event)=> {
@@ -51,15 +61,21 @@ export const addTask = (event)=> {
     return;
   }
 
-  const task = {
+  const new_task = {
     value: taskValue,
     isCompleted: false,
   };
 
-  let tasks = loadTasks();
-  tasks.push(task);
-  saveData('tasks', tasks);
-
-  taskListElement.innerHTML += taskToHtml(task);
+  loadTasks(new_task);
+  saveData('tasks', current_tasks);
   searchInputElement.value = '';
+}
+
+export const deleteTask = (event, index) => {
+  if(!confirm(`Are you sure you want to delete take ${current_tasks[index].value}`)){
+    return;
+  }
+  current_tasks.splice(index, 1);
+  saveData('tasks', current_tasks);
+  loadTasks();
 }
