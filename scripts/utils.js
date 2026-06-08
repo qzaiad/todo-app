@@ -46,7 +46,14 @@ const loadTasks = (new_task) => {
   if(new_task){
     current_tasks.push(new_task);
   }
-  taskListElement.innerHTML = tasksToHtml(current_tasks);
+  let tasksHtml = tasksToHtml(current_tasks);
+  if(!tasksHtml){
+    tasksHtml = `<li class="EmptyList">
+<img class="EmptyList__img" src="./assets/icon-empty.svg" alt="list is empty" />
+<p>Task list is empty</p>
+</li>`;
+  }
+  taskListElement.innerHTML = tasksHtml;
 
   const deleteIcons = document.querySelectorAll('.TaskList__deleteIcon');
   console.log(deleteIcons);
