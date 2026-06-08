@@ -2,9 +2,10 @@ import {
   appElement,
   DarkThemeToggleElement,
   addTaskButtonElement,
+  taskListLinkElement,
 } from './scripts/elements.js'
 
-import {addTask, DARKMODE_KEY, initOnStartup} from './scripts/utils.js'
+import {addTask, DARKMODE_KEY, hideCompletedTasks, initOnStartup} from './scripts/utils.js'
 
 // localStorage is single point of truth, i.e. always read/update localStorage tasks
 
@@ -20,3 +21,5 @@ DarkThemeToggleElement.onclick = () => {
 }
 
 addTaskButtonElement.onclick = addTask;
+
+taskListLinkElement.onclick = hideCompletedTasks;

@@ -7,3 +7,7 @@ export const taskListElement = document.querySelector('.TaskList__list');
 export const searchInputElement = document.querySelector('.TaskSearchBar__input');
 
 export const addTaskButtonElement = document.querySelector('.TaskSearchBar__button');
+
+export const taskListLinkElement = document.querySelector('.TaskList__link');
+
+export const taskListListElement = document.querySelector('.TaskList__list');

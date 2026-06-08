@@ -1,4 +1,4 @@
-import { appElement, searchInputElement, taskListElement } from "./elements";
+import { appElement, searchInputElement, taskListElement, taskListListElement } from "./elements";
 
 const TASK_KEY = 'tasks';
 export const DARKMODE_KEY = "darkmode";
@@ -109,4 +109,9 @@ const toggleTask = (event, index) => {
   current_tasks[index].isCompleted = !current_tasks[index].isCompleted;
   event.currentTarget.parentElement.classList.toggle('TaskList__taskContent--isActive');
   saveAndLoadTasks();
+}
+
+export const hideCompletedTasks = (e) => {
+  taskListListElement.classList.toggle('TaskList__list--hideCompleted');
+  event.currentTarget.classList.toggle('TaskList__link--isActive');
 }
