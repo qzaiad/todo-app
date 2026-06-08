@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Todo app built with React.js" />
+    <link rel="icon" href="./assets/favicon-Cyrve42L.ico" />
+    <title>Todo App</title>
+    <script type="module" crossorigin src="./assets/index-CSVmkiTe.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-llv84fye.css">
+  </head>
+  <body>
+    <main class="App">
+      <header class="Header">
+        <button class="DarkThemeToggle">
+          <span class="DarkThemeToggle__activate">تفعيل</span>
+          <span class="DarkThemeToggle__deactivate">إيقاف</span>
+          الوضع الليلي
+        </button>
+        <div class="SocialLinks">
+          <a href="https://www.facebook.com/m.abusre3" target="_blank" rel="noopener noreferrer">
+            <img class="SocialLinks__img" src="data:image/svg+xml,%3csvg%20width='48'%20height='48.00004'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%3e%3ctitle%3ebackground%3c/title%3e%3crect%20fill='none'%20id='canvas_background'%20height='402'%20width='582'%20y='-1'%20x='-1'/%3e%3c/g%3e%3cg%3e%3ctitle%3eLayer%201%3c/title%3e%3cellipse%20stroke='%23000'%20ry='18.184358'%20rx='18.184358'%20id='svg_3'%20cy='23.869083'%20cx='24.293297'%20stroke-width='0'%20fill='%23fff'/%3e%3cpath%20stroke='null'%20id='svg_2'%20fill='%235F83CF'%20d='m24.007785,0.107533c-13.203538,0%20-23.900272,10.696734%20-23.900272,23.884702c0,13.203538%2010.696734,23.900272%2023.900272,23.900272c13.187968,0%2023.884702,-10.696734%2023.884702,-23.900272c0,-13.187968%20-10.696734,-23.884702%20-23.884702,-23.884702zm9.061862,13.452661c0,0%20-0.77851,-0.03114%20-3.456587,0c-2.615795,0.03114%20-2.646936,1.992987%20-2.646936,2.086408l-0.03114,4.966897l6.134663,0.124562l-0.903072,6.337075l-5.20045,0l0.068198,13.403304l-6.657666,0.002647l-0.059011,-13.37481l-5.527424,-0.03114l0.140132,-6.461637l5.449573,0l0,-4.671063c0.01557,-0.498247%200.062281,-0.996493%200.124562,-1.49474c0.140132,-1.089915%200.435966,-2.179829%200.949783,-3.160753c0.451536,-0.840791%201.074344,-1.588161%201.837285,-2.164259c0.77851,-0.591668%201.697153,-0.996493%202.646936,-1.245617c0.669519,-0.186843%201.354608,-0.311404%202.039697,-0.326974c0.887502,-0.03114%204.375229,0.077851%205.247161,0.093421l-0.155702,5.91668z'/%3e%3c/g%3e%3c/svg%3e" alt="facebook icon" />
+          </a>
+          <a href="https://twitter.com/mohamed_abusrea" target="_blank" rel="noopener noreferrer">
+            <img class="SocialLinks__img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGlkPSJDYXBhXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDExMi4xOTcgMTEyLjE5NzsiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDExMi4xOTcgMTEyLjE5NyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGc+PGNpcmNsZSBjeD0iNTYuMDk5IiBjeT0iNTYuMDk4IiByPSI1Ni4wOTgiIHN0eWxlPSJmaWxsOiM1NUFDRUU7Ii8+PGc+PHBhdGggZD0iTTkwLjQ2MSw0MC4zMTZjLTIuNDA0LDEuMDY2LTQuOTksMS43ODctNy43MDIsMi4xMDljMi43NjktMS42NTksNC44OTQtNC4yODQsNS44OTctNy40MTcgICAgYy0yLjU5MSwxLjUzNy01LjQ2MiwyLjY1Mi04LjUxNSwzLjI1M2MtMi40NDYtMi42MDUtNS45MzEtNC4yMzMtOS43OS00LjIzM2MtNy40MDQsMC0xMy40MDksNi4wMDUtMTMuNDA5LDEzLjQwOSAgICBjMCwxLjA1MSwwLjExOSwyLjA3NCwwLjM0OSwzLjA1NmMtMTEuMTQ0LTAuNTU5LTIxLjAyNS01Ljg5Ny0yNy42MzktMTQuMDEyYy0xLjE1NCwxLjk4LTEuODE2LDQuMjg1LTEuODE2LDYuNzQyICAgIGMwLDQuNjUxLDIuMzY5LDguNzU3LDUuOTY1LDExLjE2MWMtMi4xOTctMC4wNjktNC4yNjYtMC42NzItNi4wNzMtMS42NzljLTAuMDAxLDAuMDU3LTAuMDAxLDAuMTE0LTAuMDAxLDAuMTcgICAgYzAsNi40OTcsNC42MjQsMTEuOTE2LDEwLjc1NywxMy4xNDdjLTEuMTI0LDAuMzA4LTIuMzExLDAuNDcxLTMuNTMyLDAuNDcxYy0wLjg2NiwwLTEuNzA1LTAuMDgzLTIuNTIzLTAuMjM5ICAgIGMxLjcwNiw1LjMyNiw2LjY1Nyw5LjIwMywxMi41MjYsOS4zMTJjLTQuNTksMy41OTctMTAuMzcxLDUuNzQtMTYuNjU1LDUuNzRjLTEuMDgsMC0yLjE1LTAuMDYzLTMuMTk3LTAuMTg4ICAgIGM1LjkzMSwzLjgwNiwxMi45ODEsNi4wMjUsMjAuNTUzLDYuMDI1YzI0LjY2NCwwLDM4LjE1Mi0yMC40MzIsMzguMTUyLTM4LjE1M2MwLTAuNTgxLTAuMDEzLTEuMTYtMC4wMzktMS43MzQgICAgQzg2LjM5MSw0NS4zNjYsODguNjY0LDQzLjAwNSw5MC40NjEsNDAuMzE2TDkwLjQ2MSw0MC4zMTZ6IiBzdHlsZT0iZmlsbDojRjFGMkYyOyIvPjwvZz48L2c+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PC9zdmc+" alt="twitter icon" />
+          </a>
+          <a href="https://www.youtube.com/mohamedabusrea" target="_blank" rel="noopener noreferrer">
+            <img class="SocialLinks__img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQ4IDQ4IiBpZD0iTGF5ZXJfMSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNDggNDgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxjaXJjbGUgY3g9IjI0IiBjeT0iMjQiIGZpbGw9IiNDQTM3MzciIHI9IjI0Ii8+PHBhdGggZD0iTTM1LjIsMTguNWMwLTAuMSwwLTAuMi0wLjEtMC4zYzAsMCwwLTAuMSwwLTAuMWMtMC4zLTAuOS0xLjEtMS41LTIuMS0xLjVoMC4yYzAsMC0zLjktMC42LTkuMi0wLjYgIGMtNS4yLDAtOS4yLDAuNi05LjIsMC42SDE1Yy0xLDAtMS44LDAuNi0yLjEsMS41YzAsMCwwLDAuMSwwLDAuMWMwLDAuMSwwLDAuMi0wLjEsMC4zYy0wLjEsMS0wLjQsMy4xLTAuNCw1LjUgIGMwLDIuNCwwLjMsNC41LDAuNCw1LjVjMCwwLjEsMCwwLjIsMC4xLDAuM2MwLDAsMCwwLjEsMCwwLjFjMC4zLDAuOSwxLjEsMS41LDIuMSwxLjVoLTAuMmMwLDAsMy45LDAuNiw5LjIsMC42ICBjNS4yLDAsOS4yLTAuNiw5LjItMC42SDMzYzEsMCwxLjgtMC42LDIuMS0xLjVjMCwwLDAtMC4xLDAtMC4xYzAtMC4xLDAtMC4yLDAuMS0wLjNjMC4xLTEsMC40LTMuMSwwLjQtNS41ICBDMzUuNiwyMS42LDM1LjQsMTkuNSwzNS4yLDE4LjV6IE0yNy40LDI0LjVsLTQuNywzLjRDMjIuNiwyOCwyMi41LDI4LDIyLjQsMjhjLTAuMSwwLTAuMiwwLTAuMy0wLjFjLTAuMi0wLjEtMC4zLTAuMy0wLjMtMC41di02LjggIGMwLTAuMiwwLjEtMC40LDAuMy0wLjVjMC4yLTAuMSwwLjQtMC4xLDAuNiwwbDQuNywzLjRjMC4xLDAuMSwwLjIsMC4zLDAuMiwwLjVDMjcuNywyNC4yLDI3LjYsMjQuNCwyNy40LDI0LjV6IiBmaWxsPSIjRkZGRkZGIi8+PC9zdmc+" alt="youtube icon" />
+          </a>
+          <a href="https://www.github.com/mohamedabusrea" target="_blank" rel="noopener noreferrer">
+            <img class="SocialLinks__img" src="data:image/svg+xml,%3csvg%20width='64'%20height='64'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%3e%3ctitle%3ebackground%3c/title%3e%3crect%20fill='none'%20id='canvas_background'%20height='402'%20width='582'%20y='-1'%20x='-1'/%3e%3c/g%3e%3cg%3e%3ctitle%3eLayer%201%3c/title%3e%3cpath%20id='svg_3'%20fill='%2324292e'%20d='m32,0c-17.673,0%20-32,14.327%20-32,32c0,17.673%2014.327,32%2032,32s32,-14.327%2032,-32c0,-17.673%20-14.327,-32%20-32,-32z'/%3e%3cpath%20id='Cat_3_'%20fill='%23FFFFFF'%20d='m38.592,50.166l-4.84,0l-4.844,0c0,0%200.014,-2.874%200,-4.844c-6.629,1.428%20-8.479,-3.633%20-8.479,-3.633c-1.21,-2.423%20-2.423,-3.633%20-2.423,-3.633c-2.423,-1.438%200,-1.21%200,-1.21c2.423,0%203.633,2.423%203.633,2.423c2.126,3.609%205.908,3.028%207.266,2.423c0,-1.21%200.53,-3.042%201.21,-3.633c-5.29,-0.595%20-9.693,-3.633%20-9.693,-9.689s1.216,-7.266%202.427,-8.479c-0.244,-0.597%20-1.259,-2.805%200.037,-6.056c0,0%202.38,0%204.803,3.633c1.2,-1.2%204.844,-1.21%206.056,-1.21c1.208,0%204.854,0.01%206.054,1.21c2.423,-3.633%204.809,-3.633%204.809,-3.633c1.296,3.251%200.282,5.459%200.037,6.056c1.21,1.21%202.423,2.423%202.423,8.479s-4.397,9.092%20-9.689,9.689c0.682,0.591%201.21,2.675%201.21,3.633l0.003,8.474l0,0z'/%3e%3c/g%3e%3c/svg%3e" alt="github icon" />
+          </a>
+        </div>
+      </header>
+
+      <div class="App__wrapper">
+        <div class="TaskSearchBar">
+          <label for="search-input" class="TaskSearchBar__label"> قائمة المهام </label>
+          <form class="TaskSearchBar__searchContent">
+            <input
+              id="search-input"
+              class="TaskSearchBar__input"
+              type="text"
+              placeholder="قم بإضافة مهمه..."
+              required
+            />
+            <button class="TaskSearchBar__button">إضافة</button>
+          </form>
+        </div>
+
+        <div class="TaskList">
+          <button class="TaskList__link">
+            <span class="show">إظهار</span><span class="hide">إخفاء</span> المهام المكتملة
+          </button>
+          <ul class="TaskList__list"></ul>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<!--
+ TODO
+  ✅ Add dark mode functionality
+  ✅ add active state to darkModeToggle button (change color & text)
+  ✅ initData from localStorage
+    ✅ Dark Theme
+    ✅ Task list & Empty state
+  ✅ add task functionality
+    ✅ add task by button
+    ✅ add task by enter key
+  ✅ delete task functionality
+  ✅ complete task functionality
+  ✅ show completed tasks functionality
+  ✅ Accessibility
+  - Suggestions
+    - Edit task by clicking on it
+    - Arrange tasks by drag & drop
+-->
