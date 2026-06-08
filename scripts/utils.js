@@ -1,6 +1,7 @@
-import { searchInputElement, taskListElement } from "./elements";
+import { appElement, searchInputElement, taskListElement } from "./elements";
 
 const TASK_KEY = "tasks";
+export const DARKMODE_KEY = "darkmode";
 
 let current_tasks;
 
@@ -40,7 +41,7 @@ const tasksToHtml = (tasks) => {
   return result;
 }
 
-export const loadTasks = (new_task) => {
+const loadTasks = (new_task) => {
   current_tasks = fetchData(TASK_KEY);
   if(new_task){
     current_tasks.push(new_task);
@@ -52,6 +53,11 @@ export const loadTasks = (new_task) => {
   deleteIcons?.forEach((icon, index) => {
     icon.onclick = (event) => deleteTask(event, index);
   });
+}
+
+export const initOnStartup = () => {
+  loadTasks();
+  null !== localStorage.getItem(DARKMODE_KEY) && appElement.classList.add('App--isDark');
 }
 
 export const addTask = (event)=> {
