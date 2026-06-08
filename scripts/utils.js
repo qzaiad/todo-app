@@ -1,18 +1,16 @@
 import { appElement, searchInputElement, taskListElement } from "./elements";
 
-const TASK_KEY = "tasks";
+const TASK_KEY = 'tasks';
 export const DARKMODE_KEY = "darkmode";
 
 let current_tasks;
 
 const saveData = (key, value) => {
-  console.log(`saveData: ${key} -> ${JSON.stringify(value)}`)
   localStorage.setItem(key, JSON.stringify(value)); // array of objects
 }
 
 const fetchData = (key) => {
   let data = localStorage.getItem(key); // string
-  console.log(`fetchData: ${key} -> ${data}`);
   return data ? JSON.parse(data) : []; // array of objects or null
 }
 
@@ -41,6 +39,20 @@ const tasksToHtml = (tasks) => {
   return result;
 }
 
+const addEventHandlersForDeleteTasks = () => {
+  const deleteIcons = document.querySelectorAll('.TaskList__deleteIcon');
+  deleteIcons?.forEach((icon, index) => {
+    icon.onclick = (event) => deleteTask(event, index);
+  });
+}
+
+const addEventHandlersForToggleTasks = () => {
+  const checkBoxes = document.querySelectorAll('.TaskList__checkbox');
+  checkBoxes?.forEach((box, index) => {
+    box.onclick = (event) => toggleTask(event, index);
+  });
+}
+
 const loadTasks = (new_task) => {
   current_tasks = fetchData(TASK_KEY);
   if(new_task){
@@ -54,12 +66,8 @@ const loadTasks = (new_task) => {
 </li>`;
   }
   taskListElement.innerHTML = tasksHtml;
-
-  const deleteIcons = document.querySelectorAll('.TaskList__deleteIcon');
-  console.log(deleteIcons);
-  deleteIcons?.forEach((icon, index) => {
-    icon.onclick = (event) => deleteTask(event, index);
-  });
+  addEventHandlersForDeleteTasks();
+  addEventHandlersForToggleTasks();
 }
 
 export const initOnStartup = () => {
@@ -84,11 +92,21 @@ export const addTask = (event)=> {
   searchInputElement.value = '';
 }
 
-export const deleteTask = (event, index) => {
+const saveAndLoadTasks = () => {
+  saveData(TASK_KEY, current_tasks);
+  loadTasks();
+}
+
+const deleteTask = (event, index) => {
   if(!confirm(`Are you sure you want to delete take ${current_tasks[index].value}`)){
     return;
   }
   current_tasks.splice(index, 1);
-  saveData('tasks', current_tasks);
-  loadTasks();
+  saveAndLoadTasks();
+}
+
+const toggleTask = (event, index) => {
+  current_tasks[index].isCompleted = !current_tasks[index].isCompleted;
+  event.currentTarget.parentElement.classList.toggle('TaskList__taskContent--isActive');
+  saveAndLoadTasks();
 }
