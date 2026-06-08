@@ -1,4 +1,4 @@
-import { appElement, searchInputElement, taskListElement, taskListListElement } from "./elements";
+import { addTaskButtonElement, appElement, DarkThemeToggleElement, searchInputElement, taskListElement, taskListLinkElement, taskListListElement } from "./elements";
 
 const TASK_KEY = 'tasks';
 export const DARKMODE_KEY = "darkmode";
@@ -50,6 +50,8 @@ const addEventHandlersForToggleTasks = () => {
   const checkBoxes = document.querySelectorAll('.TaskList__checkbox');
   checkBoxes?.forEach((box, index) => {
     box.onclick = (event) => toggleTask(event, index);
+    // return true iff tab should still work, otherwise use addEventListener() without return true
+    box.onkeydown = (event) => { event.key === 'Enter' && toggleTask(event, index); return true; }
   });
 }
 
@@ -73,6 +75,18 @@ const loadTasks = (new_task) => {
 export const initOnStartup = () => {
   loadTasks();
   null !== localStorage.getItem(DARKMODE_KEY) && appElement.classList.add('App--isDark');
+
+  addTaskButtonElement.onclick = addTask;
+  taskListLinkElement.onclick = hideCompletedTasks;
+
+  DarkThemeToggleElement.onclick = () => {
+    const isDark = appElement.classList.toggle('App--isDark');
+    if(isDark){
+      localStorage.setItem(DARKMODE_KEY, '');
+    }else{
+      localStorage.removeItem(DARKMODE_KEY);
+    }
+  }
 }
 
 export const addTask = (event)=> {
@@ -108,7 +122,14 @@ const deleteTask = (event, index) => {
 const toggleTask = (event, index) => {
   current_tasks[index].isCompleted = !current_tasks[index].isCompleted;
   event.currentTarget.parentElement.classList.toggle('TaskList__taskContent--isActive');
-  saveAndLoadTasks();
+  /**
+   * this will re-renders the task list (rebuilds the DOM),
+   * which destroys and recreates all checkboxes ? so focus
+   * is lost because the element that had focus no longer exists.
+   * -> just save data to localStorage
+   */
+  // saveAndLoadTasks();
+  saveData(TASK_KEY, current_tasks);
 }
 
 export const hideCompletedTasks = (e) => {
