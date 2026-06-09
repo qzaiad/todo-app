@@ -110,6 +110,12 @@ const deleteTask = (event, index) => {
 const toggleTask = (event, index) => {
   current_tasks[index].isCompleted = !current_tasks[index].isCompleted;
   event.currentTarget.parentElement.classList.toggle('TaskList__taskContent--isActive');
+  if(current_tasks[index].isCompleted){
+    const [removed_task] = current_tasks.splice(index, 1);
+    current_tasks.push(removed_task);
+    saveAndLoadTasks(); // focus is loosed
+    return;
+  }
   /**
    * this will re-renders the task list (rebuilds the DOM),
    * which destroys and recreates all checkboxes ? so focus
