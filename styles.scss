@@ -319,3 +319,25 @@ code {
     opacity: 0.5;
   }
 }
+.TaskList__dragHandle {
+  cursor: grab;
+  padding: 0 0.8rem;
+  color: var(--color-grayish);
+  font-size: 1.6rem;
+  
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.TaskList__taskContent {
+  transition: opacity var(--timing-animation);
+
+  &--dragging {
+    opacity: 0.2;
+  }
+
+  &--dragOver {
+    border-top: 2px solid var(--color-blue); // visual drop target indicator
+  }
+}

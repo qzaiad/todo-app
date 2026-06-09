@@ -14,8 +14,11 @@ const fetchData = (key) => {
   return data ? JSON.parse(data) : []; // array of objects or null
 }
 
-const taskToHtml = (task) => {
-return `<li class="TaskList__taskContent${task.isCompleted ? " TaskList__taskContent--isActive" : ""}">
+const taskToHtml = (task, index) => {
+return `<li class="TaskList__taskContent${task.isCompleted ? " TaskList__taskContent--isActive" : ""}"
+            draggable="true" data-index="${index}"
+         >
+<div class='TaskList__dragHandle' title="drag to reorder">⠿</div>
 <div class='TaskList__checkbox' tabindex="0" role="button">
   <img class='TaskList__checkboxImg' src="./assets/icon-checkmark.svg" alt="checkmark" />
 </div>
@@ -33,26 +36,10 @@ return `<li class="TaskList__taskContent${task.isCompleted ? " TaskList__taskCon
 
 const tasksToHtml = (tasks) => {
   let result = '';
-  tasks.forEach((task) => {
-    result += taskToHtml(task);
+  tasks.forEach((task, index) => {
+    result += taskToHtml(task, index);
   })
   return result;
-}
-
-const addEventHandlersForDeleteTasks = () => {
-  const deleteIcons = document.querySelectorAll('.TaskList__deleteIcon');
-  deleteIcons?.forEach((icon, index) => {
-    icon.onclick = (event) => deleteTask(event, index);
-  });
-}
-
-const addEventHandlersForToggleTasks = () => {
-  const checkBoxes = document.querySelectorAll('.TaskList__checkbox');
-  checkBoxes?.forEach((box, index) => {
-    box.onclick = (event) => toggleTask(event, index);
-    // return true iff tab should still work, otherwise use addEventListener() without return true
-    box.onkeydown = (event) => { event.key === 'Enter' && toggleTask(event, index); return true; }
-  });
 }
 
 const loadTasks = (new_task) => {
@@ -70,6 +57,7 @@ const loadTasks = (new_task) => {
   taskListElement.innerHTML = tasksHtml;
   addEventHandlersForDeleteTasks();
   addEventHandlersForToggleTasks();
+  addEventHandlersForDragAndDrop();
 }
 
 export const initOnStartup = () => {
@@ -136,3 +124,63 @@ export const hideCompletedTasks = (e) => {
   taskListListElement.classList.toggle('TaskList__list--hideCompleted');
   event.currentTarget.classList.toggle('TaskList__link--isActive');
 }
+
+const addEventHandlersForDeleteTasks = () => {
+  const deleteIcons = document.querySelectorAll('.TaskList__deleteIcon');
+  deleteIcons?.forEach((icon, index) => {
+    icon.onclick = (event) => deleteTask(event, index);
+  });
+}
+
+const addEventHandlersForToggleTasks = () => {
+  const checkBoxes = document.querySelectorAll('.TaskList__checkbox');
+  checkBoxes?.forEach((box, index) => {
+    box.onclick = (event) => toggleTask(event, index);
+    // return true iff tab should still work, otherwise use addEventListener() without return true
+    box.onkeydown = (event) => { event.key === 'Enter' && toggleTask(event, index); return true; }
+  });
+}
+
+const addEventHandlersForDragAndDrop = () => {
+  const items = document.querySelectorAll('.TaskList__taskContent[draggable]');
+  let draggedIndex = null;
+
+  items.forEach((item) => {
+
+    item.addEventListener('dragstart', () => {
+      draggedIndex = parseInt(item.dataset.index);
+      item.classList.add('TaskList__taskContent--dragging');
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('TaskList__taskContent--dragging');
+      document.querySelectorAll('.TaskList__taskContent')
+        .forEach(i => i.classList.remove('TaskList__taskContent--dragOver'));
+    });
+
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault(); // required to allow drop
+      item.classList.add('TaskList__taskContent--dragOver');
+    });
+
+    item.addEventListener('dragleave', () => {
+      item.classList.remove('TaskList__taskContent--dragOver');
+    });
+
+    item.addEventListener('drop', () => {
+      const targetIndex = parseInt(item.dataset.index);
+      if (draggedIndex === null || draggedIndex === targetIndex) return;
+
+      // reorder current_tasks array
+      const [draggedTask] = current_tasks.splice(draggedIndex, 1);  // mutable. returns an arr with the removed elements
+      /**
+       * If start >= array.length, no element will be deleted, but the method
+       * will behave as an adding function, adding as many elements as provided.
+       */
+      current_tasks.splice(targetIndex, 0, draggedTask); // insert draggedTask at index targetIndex
+
+      saveAndLoadTasks();
+    });
+
+  });
+};
